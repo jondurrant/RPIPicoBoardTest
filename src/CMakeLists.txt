@@ -4,6 +4,16 @@ add_executable(${NAME}
         BoardTest.cpp
         PicoOnboardLED.cpp
         LEDsTest.cpp
+        ADCComp.cpp
+        GPIOInputMgr.cpp
+        GPIOObserver.cpp
+        HCSR04Range.cpp
+        HCSR04Comp.cpp
+        Servo.cpp
+        ServoTest.cpp
+        ServoTestAgent.cpp
+        TestAgent.cpp
+        TestBoardAgent.cpp
         )
 
 # Pull in our pico_stdlib which pulls in commonly used features
@@ -11,6 +21,8 @@ target_link_libraries(${NAME}
 	 pico_stdlib
      FreeRTOS-Kernel-Heap4 # FreeRTOS kernel and dynamic heap
      freertos_config #FREERTOS_PORT
+     hardware_adc
+     hardware_pwm
 	)
 	
 target_include_directories(${NAME} PRIVATE

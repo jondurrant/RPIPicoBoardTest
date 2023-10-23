@@ -15,7 +15,7 @@
 
 #define LEDS_TEST_MAX 10
 
-class LEDsTest {
+class LEDsTest : public BoardTest {
 public:
 	LEDsTest();
 	virtual ~LEDsTest();

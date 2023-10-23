@@ -14,6 +14,11 @@
 
 #include "PicoOnboardLED.h"
 #include "LEDsTest.h"
+#include "ADCComp.h"
+#include "HCSR04Comp.h"
+#include "ServoTest.h"
+#include "ServoTestAgent.h"
+#include "TestBoardAgent.h"
 
 
 #define TASK_PRIORITY      ( tskIDLE_PRIORITY + 1UL )
@@ -76,23 +81,52 @@ void runTimeStats(){
 void main_task(void* params){
 	PicoOnboardLED onboardLED;
 	LEDsTest leds;
+	ADCComp adc;
+	//HCSR04Comp hcsr04(10, 11, 10, 80);
+	//HCSR04Comp hcsr04(8, 9, 10, 80);
+	HCSR04Comp hcsr04(6, 7, 10, 80);
+	TestBoardAgent ledAgent(&leds);
+	TestBoardAgent adcAgent(&adc);
+	TestBoardAgent onboardAgent(&onboardLED);
+	TestBoardAgent hcsr04Agent(&hcsr04);
 
-  printf("Main task started\n");
+	ServoTestAgent servos;
+
+	printf("Main task started\n");
+
+	servos.addServo(22);
+	servos.addServo(21);
+	servos.addServo(20);
+	servos.addServo(19);
+	servos.addServo(18);
 
   leds.addLed(1, 0);
   leds.addLed(2, 1);
   leds.addLed(3, 2);
   leds.addLed(4, 3);
+  leds.addLed(5, 4);
 
-  onboardLED.setup();
-  leds.setup();
 
+  adc.addADC(26, 2.2, 2.6);
+  adc.addADC(27,  1.3, 1.8);
+  adc.addADC(28,  0.6,  1.1);
+
+  servos.start("Servos", TASK_PRIORITY);
+  ledAgent.start("LEDs", TASK_PRIORITY);
+  adcAgent.start("ADC", TASK_PRIORITY);
+  onboardAgent.start("Onboard LED", TASK_PRIORITY);
+  hcsr04Agent.start("LEDs", TASK_PRIORITY);
 
   for(;;){
 
-	  for (int i=0; i < 100; i++){
-		  onboardLED.test();
-		  leds.test();
+	  for (int i=0; i < 10; i++){
+		  servos.startCycle();
+		  ledAgent.startCycle();
+		  adcAgent.startCycle();
+		  onboardAgent.startCycle();
+		  hcsr04Agent.startCycle();
+
+		  vTaskDelay(10000);
 	  }
 
     runTimeStats();
