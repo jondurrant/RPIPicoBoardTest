@@ -1,6 +1,8 @@
 /*
  * LEDsTest.h
  *
+ * Flash LEDS a number of times according to value in sequence.
+ * 1st LED is flashed once. 2nd LED is flashed twice, etc.
  *  Created on: 22 Oct 2023
  *      Author: jondurrant
  */
@@ -20,9 +22,23 @@ public:
 	LEDsTest();
 	virtual ~LEDsTest();
 
+	/***
+	 * Setup the tests
+	 */
 	virtual void setup();
+
+	/***
+	 * Run test
+	 * @return true of passed
+	 */
 	virtual bool test();
 
+	/***
+	 * Add an LED
+	 * @param sequence - sequence
+	 * @param gpio - GPIO PAd
+	 * @param invert - invert if it is in sync pattern
+	 */
 	void addLed(uint sequence, uint gpio, bool invert = false);
 
 private:

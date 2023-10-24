@@ -1,6 +1,8 @@
 /*
  * ADCComp.h
  *
+ * Board Test for ADC. Test up to 3 ADC on Pico
+ *
  *  Created on: 23 Oct 2023
  *      Author: jondurrant
  */
@@ -18,9 +20,23 @@ public:
 	ADCComp();
 	virtual ~ADCComp();
 
+	/***
+	 * Setup the GPIO s ADC
+	 */
 	virtual void setup();
+
+	/***
+	 * Do a ADC cycle and check in range
+	 * @return
+	 */
 	virtual bool test();
 
+	/***
+	 * Add GPIO to test ADC for
+	 * @param gpio - must be ADC pin 26 to 28
+	 * @param minVolt - minimum volts
+	 * @param maxVolt - maximum volts
+	 */
 	void addADC(uint gpio, float minVolt, float maxVolt);
 
 private:

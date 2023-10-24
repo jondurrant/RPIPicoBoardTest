@@ -1,6 +1,8 @@
 /*
  * StepperTestAgent.h
  *
+ * Test a stepper motor by having it drive forward and then backwards. Changing direction each cycle.
+ *
  *  Created on: 24 Oct 2023
  *      Author: jondurrant
  */
@@ -24,11 +26,27 @@ public:
 
 	virtual ~StepperTestAgent();
 
+	/***
+	 * Start a test cycle
+	 */
 	virtual void startCycle();
 
+	/***
+	 * Check if cycle complete
+	 * @return true means cycle is completed
+	 */
 	virtual bool isCycleComplete( );
+
+	/***
+	 * Test result
+	 * @return always true
+	 */
 	virtual bool isTestOK();
 
+	/***
+	 * Get name of the test or in fact the Task
+	 * @return Task Name
+	 */
 	virtual const char * getName();
 
 private:

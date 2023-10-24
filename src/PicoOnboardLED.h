@@ -1,6 +1,9 @@
 /*
  * PicoOnboardLED.h
  *
+ * Test flash the onboard LED for a Pico (not Pico-W).
+ * Will just flash once per test
+ *
  *  Created on: 22 Oct 2023
  *      Author: jondurrant
  */

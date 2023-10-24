@@ -1,6 +1,8 @@
 /*
  * BoardTest.h
  *
+ * Abstract superclass for a simple (non Task) test
+ *
  *  Created on: 22 Oct 2023
  *      Author: jondurrant
  */
@@ -16,9 +18,21 @@ public:
 	BoardTest();
 	virtual ~BoardTest();
 
+	/***
+	 * Setup the test. Called at start of each cycle
+	 * Default is NOP
+	 */
 	virtual void setup();
+
+	/****
+	 * Tear down tests. Called at end of each cycle
+	 */
 	virtual void tearDown();
 
+	/***
+	 * Undertake test
+	 * @return true of test passes
+	 */
 	virtual bool test()=0;
 };
 

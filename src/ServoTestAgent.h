@@ -1,6 +1,9 @@
 /*
  * ServoTestAgent.h
  *
+ * Agent (FreeRTOS Task) to test a group of Servos
+ * Servos will operate 200 ticks after each other, to show all working correctly
+ *
  *  Created on: 23 Oct 2023
  *      Author: jondurrant
  */
@@ -18,6 +21,10 @@ public:
 	ServoTestAgent();
 	virtual ~ServoTestAgent();
 
+	/***
+	 * Add a servo on a given GPIO port
+	 * @param gpio
+	 */
 	void addServo(uint8_t gpio);
 
 protected:

@@ -1,6 +1,9 @@
 /*
  * TestAgent.h
  *
+ * Abstract Test Agent superclass
+ *
+ *
  *  Created on: 23 Oct 2023
  *      Author: jondurrant
  */
@@ -16,11 +19,27 @@ public:
 	TestAgent();
 	virtual ~TestAgent();
 
+	/***
+	 * Start a test cycle
+	 */
 	virtual void startCycle();
 
+	/***
+	 * Check if the cycle is complete
+	 * @return true if complete
+	 */
 	virtual bool isCycleComplete();
+
+	/***
+	 * Check if passed
+	 * @return true - task passed
+	 */
 	virtual bool isTestOK();
 
+	/***
+	 * Get name of the test or in fact the task
+	 * @return task name
+	 */
 	virtual const char * getName();
 
 protected:

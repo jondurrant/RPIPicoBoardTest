@@ -1,6 +1,8 @@
 /*
  * HCSR04Range.h
  *
+ * HCSR04 Range Sensor
+ *
  *  Created on: 5 Sept 2023
  *      Author: jondurrant
  */
@@ -17,7 +19,11 @@ public:
 	HCSR04Range(uint8_t GPTrigger, uint8_t GPEcho);
 	virtual ~HCSR04Range();
 
-
+	/***
+	 * Set the trigger and ech pads
+	 * @param GPTrigger - GPIO Pad
+	 * @param GPEcho - GPIO Pad
+	 */
 	void setGP(uint8_t GPTrigger, uint8_t GPEcho);
 
 	/***

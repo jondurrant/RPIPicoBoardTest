@@ -1,6 +1,8 @@
 /*
  * BoardTests.cpp
  *
+ *  Collection of test and run as a set
+ *
  *  Created on: 24 Oct 2023
  *      Author: jondurrant
  */

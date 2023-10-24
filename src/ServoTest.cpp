@@ -1,6 +1,8 @@
 /*
  * ServoTest.cpp
  *
+ *Test a servo by turning to 10deg and 170deg
+ *
  *  Created on: 23 Oct 2023
  *      Author: jondurrant
  */

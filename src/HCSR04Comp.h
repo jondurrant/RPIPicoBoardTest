@@ -1,6 +1,8 @@
 /*
  * HCSR04Comp.h
  *
+ * Test range is within range
+ *
  *  Created on: 23 Oct 2023
  *      Author: jondurrant
  */
@@ -15,13 +17,40 @@
 class HCSR04Comp : public BoardTest{
 public:
 	HCSR04Comp();
+
+	/***
+	 * Set device and target range
+	 * @param trigger - GPIO pin
+	 * @param echo - GPIO pin
+	 * @param min - min reported in mm
+	 * @param max - reported in mm
+	 */
 	HCSR04Comp(uint trigger, uint echo, int min, int max);
 	virtual ~HCSR04Comp();
 
+	/***
+	 * Setup the test
+	 */
 	virtual void setup();
+
+	/***
+	 * Run the test
+	 * @return true if range is within min and max
+	 */
 	virtual bool test();
 
+	/***
+	 * Set the GPIO pads for the drivce
+	 * @param trigger - GPIO  pad
+	 * @param echo - GPIO pad
+	 */
 	void setGPIO(uint trigger, uint echo);
+
+	/***
+	 * Set range to check value against
+	 * @param min - mm
+	 * @param max - mm
+	 */
 	void setRange(int min, int max);
 
 private:

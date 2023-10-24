@@ -1,6 +1,8 @@
 /*
  * Servo.h
  *
+ * Manage a Servo to turn to a specified angle
+ *
  *  Created on: 1 Jun 2023
  *      Author: jondurrant
  */

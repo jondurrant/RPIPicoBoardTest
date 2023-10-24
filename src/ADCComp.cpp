@@ -1,6 +1,8 @@
 /*
  * ADCComp.cpp
  *
+ * Board Test for ADC. Test up to 3 ADC on Pico
+ *
  *  Created on: 23 Oct 2023
  *      Author: jondurrant
  */

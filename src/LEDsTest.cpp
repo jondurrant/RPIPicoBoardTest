@@ -1,6 +1,9 @@
 /*
  * LEDsTest.cpp
  *
+ *  Flash LEDS a number of times according to value in sequence.
+ * 1st LED is flashed once. 2nd LED is flashed twice, etc.
+ *
  *  Created on: 22 Oct 2023
  *      Author: jondurrant
  */

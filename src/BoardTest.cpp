@@ -1,6 +1,8 @@
 /*
  * BoardTest.cpp
  *
+ * Abstract superclass for a simple (non Task) test
+ *
  *  Created on: 22 Oct 2023
  *      Author: jondurrant
  */

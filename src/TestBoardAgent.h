@@ -1,6 +1,8 @@
 /*
  * TestBoardAgent.h
  *
+ * Generic Test Agent that will run a BoardTest class
+ *
  *  Created on: 23 Oct 2023
  *      Author: jondurrant
  */
@@ -15,10 +17,24 @@
 class TestBoardAgent : public TestAgent{
 public:
 	TestBoardAgent();
+
+	/***
+	 * Construct and provide test to run
+	 * @param p - Test
+	 */
 	TestBoardAgent(BoardTest *p);
 	virtual ~TestBoardAgent();
 
+	/***
+	 * Set the test to run
+	 * @param p
+	 */
 	void setBoardTest(BoardTest *p);
+
+	/***
+	 * Check if test passed
+	 * @return true if passed
+	 */
 	virtual bool isTestOK();
 
 protected:
