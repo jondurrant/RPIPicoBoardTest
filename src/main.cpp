@@ -8,6 +8,8 @@
 
 #include <cstdio>
 
+#include <list>
+
 
 #include "FreeRTOS.h"
 #include "task.h"
@@ -19,6 +21,10 @@
 #include "ServoTest.h"
 #include "ServoTestAgent.h"
 #include "TestBoardAgent.h"
+#include "StepperTestAgent.h"
+
+#include "BoardTests.h"
+
 
 
 #define TASK_PRIORITY      ( tskIDLE_PRIORITY + 1UL )
@@ -79,6 +85,7 @@ void runTimeStats(){
 
 
 void main_task(void* params){
+	BoardTests tests;
 	PicoOnboardLED onboardLED;
 	LEDsTest leds;
 	ADCComp adc;
@@ -91,6 +98,7 @@ void main_task(void* params){
 	TestBoardAgent hcsr04Agent(&hcsr04);
 
 	ServoTestAgent servos;
+	StepperTestAgent stepper(115, 14, 13, 12);
 
 	printf("Main task started\n");
 
@@ -116,22 +124,66 @@ void main_task(void* params){
   adcAgent.start("ADC", TASK_PRIORITY);
   onboardAgent.start("Onboard LED", TASK_PRIORITY);
   hcsr04Agent.start("LEDs", TASK_PRIORITY);
+  stepper.start("Stepper", TASK_PRIORITY);
+
+  tests.addTest(&servos);
+  tests.addTest(&ledAgent);
+  tests.addTest(&adcAgent);
+  tests.addTest(&onboardAgent);
+  tests.addTest(&hcsr04Agent);
+  tests.addTest(&stepper);
+
+  tests.run();
+
+  /*
+  std::list<TestAgentInterface *> tests;
+  tests.push_back(&servos);
+  tests.push_back(&ledAgent);
+  tests.push_back(&adcAgent);
+  tests.push_back(&onboardAgent);
+  tests.push_back(&hcsr04Agent);
+  tests.push_back(&stepper);
 
   for(;;){
 
-	  for (int i=0; i < 10; i++){
-		  servos.startCycle();
-		  ledAgent.startCycle();
-		  adcAgent.startCycle();
-		  onboardAgent.startCycle();
-		  hcsr04Agent.startCycle();
-
-		  vTaskDelay(10000);
+	  printf("Start test cycle\n");
+	  for (TestAgentInterface * test: tests ){
+		  test->startCycle();
 	  }
 
-    runTimeStats();
+	  bool cycleComplete = false;
+
+	  while (!cycleComplete){
+		  int completeCount = 0;
+		  for (TestAgentInterface * test: tests ){
+			  if (!test->isCycleComplete()){
+				 break;
+			  } else {
+				  completeCount++;
+			  }
+		  }
+		  if (tests.size() == completeCount){
+			  cycleComplete = true;
+		  }
+		  vTaskDelay(500);
+	  }
+
+	  int passCount = 0;
+	  for (TestAgentInterface * test: tests ){
+		  if (!test->isTestOK()){
+			  printf("Test failed %s\n", test->getName());
+		  } else {
+			  passCount++;
+		  }
+	  }
+
+	  printf("Tests passed %d of %d\n", passCount, tests.size());
+
+
+    //runTimeStats();
 
   }
+  */
 
 }
 

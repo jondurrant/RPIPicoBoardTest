@@ -14,6 +14,11 @@ add_executable(${NAME}
         ServoTestAgent.cpp
         TestAgent.cpp
         TestBoardAgent.cpp
+        StepperTestAgent.cpp
+        Stepper28BYJ.cpp
+        TestAgentInterface.cpp
+        StepperObserver.cpp
+        BoardTests.cpp
         )
 
 # Pull in our pico_stdlib which pulls in commonly used features

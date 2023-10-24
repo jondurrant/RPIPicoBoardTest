@@ -9,8 +9,9 @@
 #define SRC_TESTAGENT_H_
 
 #include "Agent.h"
+#include "TestAgentInterface.h"
 
-class TestAgent : public Agent {
+class TestAgent : public Agent, public TestAgentInterface {
 public:
 	TestAgent();
 	virtual ~TestAgent();
@@ -19,6 +20,8 @@ public:
 
 	virtual bool isCycleComplete();
 	virtual bool isTestOK();
+
+	virtual const char * getName();
 
 protected:
 	bool xCycle = false;

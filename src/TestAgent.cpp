@@ -21,9 +21,13 @@ void TestAgent::startCycle(){
 }
 
 bool TestAgent::isCycleComplete(){
-	return xCycle;
+	return !xCycle;
 }
 
 bool TestAgent::isTestOK(){
 	return true;
+}
+
+const char * TestAgent::getName(){
+	return pcTaskGetName(getTask());
 }
